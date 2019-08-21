@@ -8,6 +8,7 @@ create table Sector(
 id int not null AUTO_INCREMENT,
 rock_id int not null,
 name varchar(100),
+image blob,
 primary key (id),
 FOREIGN KEY (rock_id) REFERENCES Rock(id)
 );
@@ -19,9 +20,24 @@ sector_id int not null,
 name varchar(100),
 description varchar(500),
 difficulty_level varchar(10),
+
 primary key (id),
 FOREIGN KEY (sector_id) REFERENCES Sector(id)
 );
+
+create table Route_point(
+id int not null,
+route_id int not null,
+x_percent int not null,
+y_percent int not null,
+order_point int not null,
+primary key (id),
+FOREIGN KEY (route_id) REFERENCES Route(id)
+
+);
+
+
+
 
 insert into Sector ( rock_id, name)
 values ( (select id from Rock where name = 'Dupa Słonia'), 'Lipczyńska 1');
@@ -83,4 +99,6 @@ values ( (select id from Sector where name = 'Iglica 2'), 'Klasyczna', '1p', 'IV
 
 insert into Route ( sector_id, name, description, difficulty_level)
 values ( (select id from Sector where name = 'Iglica 2'), 'Rysa Pokutników', '1p', 'V+');
+
+
 
