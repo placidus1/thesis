@@ -26,7 +26,7 @@ FOREIGN KEY (sector_id) REFERENCES Sector(id)
 );
 
 create table Route_point(
-id int not null,
+id int not null auto_increment,
 route_id int not null,
 x_percent int not null,
 y_percent int not null,
@@ -99,6 +99,25 @@ values ( (select id from Sector where name = 'Iglica 2'), 'Klasyczna', '1p', 'IV
 
 insert into Route ( sector_id, name, description, difficulty_level)
 values ( (select id from Sector where name = 'Iglica 2'), 'Rysa Pokutników', '1p', 'V+');
+
+insert into Route_point (route_id, x_percent, y_percent, order_point)
+values (1, 25, 69, 1);
+insert into Route_point (route_id, x_percent, y_percent, order_point)
+values (1, 25, 59, 2);
+insert into Route_point (route_id, x_percent, y_percent, order_point)
+values (1, 25, 52, 3);
+insert into Route_point (route_id, x_percent, y_percent, order_point)
+values (1, 26, 41, 4);
+insert into Route_point (route_id, x_percent, y_percent, order_point)
+values (1, 37, 30, 5);
+insert into Route_point (route_id, x_percent, y_percent, order_point)
+values (1, 37, 24, 6);
+insert into Route_point (route_id, x_percent, y_percent, order_point)
+values (1, 35, 21, 7);
+insert into Route_point (route_id, x_percent, y_percent, order_point)
+values (1, 38, 12, 8);
+insert into Route_point (route_id, x_percent, y_percent, order_point)
+values (1, 41, 7, 9);
 
 
 
