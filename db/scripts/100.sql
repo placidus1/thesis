@@ -120,4 +120,14 @@ insert into Route_point (route_id, x_percent, y_percent, order_point)
 values (1, 41, 7, 9);
 
 
+SELECT  *
+FROM 
+(
+(
+Rock as c  JOIN Sector as o on c.id = o.rock_id 
+)join Route as r on o.id = r.sector_id
+
+#wyświetla tez pkt 
+)join Route_point as rp on  r.id = route_id
+
 
