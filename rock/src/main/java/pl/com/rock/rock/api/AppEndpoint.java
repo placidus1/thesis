@@ -20,10 +20,10 @@ public class AppEndpoint {
 
 
     @GetMapping
-            (path = "/api/rock/{id}",
+            (path = "/api/rock/{rockId}",
             produces = "application/json; charset=UTF-8")
-    public List<RockData>  getRock(@PathVariable Long id) {
-        return rockService.findRockWithSectorsWithRoutes(null,null,null);
+    public List<RockData>  getRock(@PathVariable Long rockId) {
+        return rockService.findRockWithSectorsWithRoutes(rockId,null,null);
     }
 
 
