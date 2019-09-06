@@ -20,18 +20,13 @@ public class AppEndpoint {
 
 
     @GetMapping
-            (path = "/api/rock/{rockId}",
+            (path = "/api/rock/{rockId}/sector/{sectorId}/route/{routeId}",
             produces = "application/json; charset=UTF-8")
-    public List<RockData>  getRock(@PathVariable(required = false) Long rockId) {
-        return rockService.findRockWithSectorsWithRoutes(rockId,null,null);
+    public List<RockData>  getRock(@PathVariable Long rockId, @PathVariable Long sectorId, @PathVariable Long routeId) {
+        return rockService.findRockWithSectorsWithRoutes(rockId,sectorId,routeId);
     }
 
-    @GetMapping
-            (path = "/api/rock/",
-                    produces = "application/json; charset=UTF-8")
-    public List<RockData>  getRock() {
-        return rockService.findRockWithSectorsWithRoutes(null,null,null);
-    }
+
 
 
 

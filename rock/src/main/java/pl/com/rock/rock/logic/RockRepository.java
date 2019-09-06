@@ -29,9 +29,9 @@ class RockRepository {
                 "FROM Rock as c  JOIN Sector as o on c.id = o.rock_id  " +
                 "join Route as r on o.id = r.sector_id " +
                 "where 1=1 " ;
-                 if(rockId!=null) query +=" and c.id ="+rockId +" ";
-                 if(sectorId!=null) query +="and r.sector_id ="+sectorId +" ";
-                 if(routeId!=null) query +="and r.id ="+routeId +" ";
+                 if(rockId!=null && rockId.longValue()!=-1) query +=" and c.id ="+rockId +" ";
+                 if(sectorId!=null && sectorId.longValue()!=-1) query +="and r.sector_id ="+sectorId +" ";
+                 if(routeId!=null && routeId.longValue()!=-1) query +="and r.id ="+routeId +" ";
         log.trace(query);
         System.out.println(query);
 
