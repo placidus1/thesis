@@ -72,4 +72,13 @@ public class RockService {
         return rockList;
     }
 
+    public RouteDetailData getRouteDetail(Long routeId){
+        RouteDetailData result = rockRepository.getRouteDetail(routeId);
+        List<RoutePointData> points = rockRepository.getRoutePoints(routeId);
+        RouteDetailData data = new RouteDetailData(result.getId(), result.getName(), result.getDifficultyLevel(), result.getDescription(), points);
+
+        return data;
+    }
+
+
 }

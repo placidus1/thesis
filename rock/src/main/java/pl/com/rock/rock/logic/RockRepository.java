@@ -2,10 +2,14 @@ package pl.com.rock.rock.logic;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import pl.com.rock.rock.domain.RouteDetailData;
+import pl.com.rock.rock.domain.RoutePointData;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -37,5 +41,45 @@ class RockRepository {
 
         return jdbcTemplate.queryForList(query);
     }
+
+    RouteDetailData getRouteDetail(Long routeId){
+         String query = "SELECT  * " +
+                 "from Route " +
+                 "where id= ?";
+        log.trace(query);
+
+        try {
+            return jdbcTemplate.queryForObject(query, new Object[]{routeId},
+                    (rs, rowNum) -> {
+                        RouteDetailData data = new RouteDetailData(
+                                rs.getLong("id"),
+                                rs.getString("name"),
+                                rs.getString("description"),
+                                rs.getString("difficulty_level"),
+                                null
+                        );
+                        return data;
+                    });
+        } catch (EmptyResultDataAccessException ex) {
+            return null;
+
+        }
+    }
+    List<RoutePointData> getRoutePoints(Long routeId){
+         String query = "SELECT  *\n" +
+                 "from Route_point\n" +
+                 "where route_id= "+ routeId;
+
+        log.trace(query);
+        List<Map<String, Object>> rows =  jdbcTemplate.queryForList(query);
+        List<RoutePointData> result = new ArrayList<>();
+        for(Map<String, Object> record : rows){
+            result.add(new RoutePointData(Long.valueOf(String.valueOf(record.get("id"))), Long.valueOf(String.valueOf(record.get("route_id"))),Integer.valueOf(String.valueOf(record.get("x_percent"))),Integer.valueOf(String.valueOf(record.get("y_percent"))), Integer.valueOf(String.valueOf(record.get("order_point")))));
+        }
+
+         return result;
+    }
+
+
  }
 
