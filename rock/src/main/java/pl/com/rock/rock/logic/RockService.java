@@ -3,15 +3,10 @@ package pl.com.rock.rock.logic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import pl.com.rock.rock.domain.RockData;
-import pl.com.rock.rock.domain.RouteData;
-import pl.com.rock.rock.domain.SectorData;
+import pl.com.rock.rock.domain.*;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class RockService {
@@ -25,63 +20,54 @@ public class RockService {
 
     public List<RockData> findRockWithSectorsWithRoutes(Long rockId, Long sectorId, Long routeId){
         List<RockData> rockList = new ArrayList<>();
-        List<SectorData> sectorList = new ArrayList<>();
-        List<RouteData> routeList = new ArrayList<>();
 
         List<Map<String, Object>> result = rockRepository.findRockWithSectorsWithRoutes(rockId, sectorId, routeId);
-        Map<Long,Map<Long, List<RouteData>>>  rockMap = new HashMap<>();
 
+        List<RockQueryData> rockQueryList = new ArrayList<>();
+        List<RouteQueryData> routeQueryList = new ArrayList<>();
+        List<SectorQueryData> sectorQueryList = new ArrayList<>();
 
-        for(Map record : result){
+        Set<Long> rockIds = new HashSet<>();
+        Set<Long> sectorIds = new HashSet<>();
 
-            Map <Long, List<RouteData>> sectorMap = new HashMap<>();
-            List<RouteData> routes = new ArrayList<>();
-            RouteData route = new RouteData(Long.valueOf(String.valueOf(record.get("route_id"))),(String) record.get("route_name"), (String) record.get("difficulty_level"), (String) record.get("description")) ;
-            routes.add(route);
-            sectorMap.put(Long.valueOf(String.valueOf(record.get("sector_id"))),routes );
-            rockMap.put(Long.valueOf(String.valueOf(record.get("rock_id"))), sectorMap);
-
-        }
-
-        for(Map.Entry<Long,Map<Long, List<RouteData>>> entry : rockMap.entrySet()){
-            sectorList = new ArrayList<>();
-
-            for(Map.Entry<Long, List<RouteData>> sectorEntry : entry.getValue().entrySet()){
-                routeList = new ArrayList<>();
-                for(RouteData route : sectorEntry.getValue()){
-                    routeList.add(route);
-                }
-                sectorList.add(new SectorData(null, sectorEntry.getKey(), routeList));
-
+        for(Map record : result) {
+            if(!rockIds.contains(Long.valueOf(String.valueOf(record.get("rock_id"))))) {
+                rockQueryList.add(new RockQueryData(Long.valueOf(String.valueOf(record.get("rock_id"))), String.valueOf(record.get("rock_name"))));
             }
-            rockList.add(new RockData(entry.getKey(), null, sectorList));
+
+            rockIds.add(Long.valueOf(String.valueOf(record.get("rock_id"))));
         }
 
-//        public List<OrderEmailData> findOrderSentEmails(Long id) {
-//            List<Map<String, Object>> rows = ordersJdbcRepository.findOrderSentEmails(id);
-//            List<OrderEmailData> list = new ArrayList<>();
-//            Long no = 1L;
-//            for (Map row : rows) {
-//                OrderEmailData data = new OrderEmailData(
-//                        no++,
-//                        Long.valueOf(String.valueOf(row.get("id"))),
-//                        (String) row.get("title"),
-//                        (String) row.get("sent_by"),
-//                        LocalDateTime.parse(String.valueOf(row.get("date")), dateTimeFormatter),
-//                        Long.valueOf(String.valueOf(row.get("order_id"))),
-//                        (String) row.get("message"));
-//                list.add(data);
-//            }
-//            return list;
-//        }
+        for(Map record : result) {
 
-//        routeList.add(new RouteData(1L,"Trasa","VI","Opis trasy"));
-//        sectorList.add(new SectorData("Trata", 1L, routeList ));
-//
-//
-//        rockList.add(new RockData(1L, "skała", sectorList));
-//        rockList.add(new RockData(2L,"Skała 2", sectorList));
+            if(!sectorIds.contains(Long.valueOf(String.valueOf(record.get("sector_id"))))) {
+                sectorQueryList.add(new SectorQueryData(Long.valueOf(String.valueOf(record.get("sector_id"))), String.valueOf(record.get("sector_name")), Long.valueOf(String.valueOf(record.get("rock_id")))));
+            }
+            sectorIds.add(Long.valueOf(String.valueOf(record.get("sector_id"))));
+        }
+        for(Map record : result) {
 
+            routeQueryList.add(new RouteQueryData(Long.valueOf(String.valueOf(record.get("route_id"))),(String) record.get("route_name"), (String) record.get("difficulty_level"), (String) record.get("description"), Long.valueOf(String.valueOf(record.get("sector_id")))));
+        }
+
+        for(RockQueryData rockQueryData : rockQueryList) {
+            List<SectorData> sectors = new ArrayList<>();
+
+            for(SectorQueryData sectorQueryData :sectorQueryList){
+                if(sectorQueryData.getRockId().equals(rockQueryData.getId())){
+                    List<RouteData> routes = new ArrayList<>();
+                    for(RouteQueryData routeQueryData :routeQueryList){
+                        if(sectorQueryData.getId().equals(routeQueryData.getSectorId())){
+                            routes.add(new RouteData(routeQueryData.getId(), routeQueryData.getName(), routeQueryData.getDifficultyLevel(), routeQueryData.getDescription()));
+                        }
+                    }
+                    sectors.add(new SectorData(sectorQueryData.getName(), sectorQueryData.getId(), routes));
+                }
+            }
+            rockList.add(new RockData(rockQueryData.getId(),rockQueryData.getName(), sectors));
+
+
+        }
 
         return rockList;
     }
