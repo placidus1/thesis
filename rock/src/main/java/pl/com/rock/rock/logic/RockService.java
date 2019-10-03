@@ -47,7 +47,7 @@ public class RockService {
         }
         for(Map record : result) {
 
-            routeQueryList.add(new RouteQueryData(Long.valueOf(String.valueOf(record.get("route_id"))),(String) record.get("route_name"), (String) record.get("difficulty_level"), (String) record.get("description"), Long.valueOf(String.valueOf(record.get("sector_id")))));
+            routeQueryList.add(new RouteQueryData(Long.valueOf(String.valueOf(record.get("route_id"))),(String) record.get("route_name"), (String) record.get("difficulty_level"), (String) record.get("description"), Long.valueOf(String.valueOf(record.get("sector_id"))),(String) record.get("image_name")));
         }
 
         for(RockQueryData rockQueryData : rockQueryList) {
@@ -58,7 +58,7 @@ public class RockService {
                     List<RouteData> routes = new ArrayList<>();
                     for(RouteQueryData routeQueryData :routeQueryList){
                         if(sectorQueryData.getId().equals(routeQueryData.getSectorId())){
-                            routes.add(new RouteData(routeQueryData.getId(), routeQueryData.getName(), routeQueryData.getDifficultyLevel(), routeQueryData.getDescription()));
+                            routes.add(new RouteData(routeQueryData.getId(), routeQueryData.getName(), routeQueryData.getDifficultyLevel(), routeQueryData.getDescription(), routeQueryData.getImageName()));
                         }
                     }
                     sectors.add(new SectorData(sectorQueryData.getName(), sectorQueryData.getId(), routes));
@@ -75,7 +75,7 @@ public class RockService {
     public RouteDetailData getRouteDetail(Long routeId){
         RouteDetailData result = rockRepository.getRouteDetail(routeId);
         List<RoutePointData> points = rockRepository.getRoutePoints(routeId);
-        RouteDetailData data = new RouteDetailData(result.getId(), result.getName(), result.getDifficultyLevel(), result.getDescription(), points);
+        RouteDetailData data = new RouteDetailData(result.getId(), result.getName(), result.getDifficultyLevel(), result.getDescription(),result.getImageName(), points);
 
         return data;
     }

@@ -5,14 +5,18 @@ public class RouteData {
     private String name;
     private String difficultyLevel;
     private String description;
+    private String imageName;
 
 
-    public RouteData(Long id, String name, String difficultyLevel, String description) {
+    public RouteData(Long id, String name, String difficultyLevel, String description, String imageName) {
         this.id = id;
         this.name = name;
         this.difficultyLevel = difficultyLevel;
         this.description = description;
+        this.imageName = imageName;
     }
+
+
 
     public Long getId() {
         return id;
@@ -28,5 +32,9 @@ public class RouteData {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getImageName() {
+        return imageName;
     }
 }

@@ -53,7 +53,8 @@ class RockRepository {
                                 rs.getString("name"),
                                 rs.getString("description"),
                                 rs.getString("difficulty_level"),
-                                null
+                                rs.getString("image_name"),
+                                getRoutePoints(routeId)
                         );
                         return data;
                     });

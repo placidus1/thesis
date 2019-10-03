@@ -8,17 +8,19 @@ public class RouteDetailData {
     private String name;
     private String difficultyLevel;
     private String description;
+    private String imageName;
     private List<RoutePointData> points = new ArrayList<>();
 
 
 
 
 
-    public RouteDetailData(Long id, String name, String difficultyLevel, String description, List<RoutePointData> points) {
+    public RouteDetailData(Long id, String name, String difficultyLevel, String description, String imageName ,List<RoutePointData> points) {
         this.id = id;
         this.name = name;
         this.difficultyLevel = difficultyLevel;
         this.description = description;
+        this.imageName = imageName;
         this.points = points;
 
     }
@@ -37,6 +39,10 @@ public class RouteDetailData {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getImageName() {
+        return imageName;
     }
 
     public List<RoutePointData> getPoints() {
