@@ -28,7 +28,7 @@ public class AppEndpoint {
     }
 
     @GetMapping
-            (path = "/api/route/{routeId}",
+            (path = "api/route/{routeId}",
                     produces = "application/json; charset=UTF-8")
     public RouteDetailData  getRouteDetail(@PathVariable Long routeId) {
         return rockService.getRouteDetail(routeId);

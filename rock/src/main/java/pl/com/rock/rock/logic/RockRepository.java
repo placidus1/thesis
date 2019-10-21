@@ -15,7 +15,7 @@ import java.util.Map;
 
 
 @Service
-class RockRepository {
+public class RockRepository {
     private static final Logger log = (Logger) LoggerFactory.getLogger(RockRepository.class);
 
      private JdbcTemplate jdbcTemplate;
@@ -44,6 +44,7 @@ class RockRepository {
                  "from Route " +
                  "where id= ?";
         log.trace(query);
+        //zmienic sql zapytanie
 
         try {
             return jdbcTemplate.queryForObject(query, new Object[]{routeId},
@@ -55,6 +56,8 @@ class RockRepository {
                                 rs.getString("difficulty_level"),
                                 rs.getString("image_name"),
                                 getRoutePoints(routeId)
+//                                rs.getString("rock_name"),
+//                                rs.getString("sector_name")
                         );
                         return data;
                     });
