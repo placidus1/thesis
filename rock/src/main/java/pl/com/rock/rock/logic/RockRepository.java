@@ -40,11 +40,12 @@ public class RockRepository {
     }
 
     RouteDetailData getRouteDetail(Long routeId){
-         String query = "SELECT  * " +
-                 "from Route " +
+         String query = "SELECT r.id,r.name, r.description, r.difficulty_level,r.image_name, (select name from Sector where id = r.sector_id ) as sector_name,\n" +
+                 "(select s.name from Rock as s, Sector as se where s.id = se.rock_id and se.id = r.sector_id  )as rock_name " +
+                 "from Route as r " +
                  "where id= ?";
         log.trace(query);
-        //zmienic sql zapytanie
+
 
         try {
             return jdbcTemplate.queryForObject(query, new Object[]{routeId},
@@ -55,9 +56,9 @@ public class RockRepository {
                                 rs.getString("description"),
                                 rs.getString("difficulty_level"),
                                 rs.getString("image_name"),
-                                getRoutePoints(routeId)
-//                                rs.getString("rock_name"),
-//                                rs.getString("sector_name")
+                                getRoutePoints(routeId),
+                                rs.getString("rock_name"),
+                                rs.getString("sector_name")
                         );
                         return data;
                     });

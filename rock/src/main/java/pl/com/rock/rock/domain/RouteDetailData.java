@@ -10,23 +10,23 @@ public class RouteDetailData {
     private String description;
     private String imageName;
     private List<RoutePointData> points = new ArrayList<>();
-//    private String rockName;
-//    private String sectorName;
+    private String rockName;
+    private String sectorName;
 
     public RouteDetailData(  ) {
 
 
     }
 
-    public RouteDetailData(Long id, String name, String difficultyLevel, String description, String imageName, List<RoutePointData> points/*String rockName, String sectorName*/   ) {
+    public RouteDetailData(Long id, String name, String difficultyLevel, String description, String imageName, List<RoutePointData> points, String rockName, String sectorName ) {
         this.id = id;
         this.name = name;
         this.difficultyLevel = difficultyLevel;
         this.description = description;
         this.imageName = imageName;
         this.points = points;
-//        this.rockName = rockName;
-//        this.sectorName=sectorName;
+        this.rockName = rockName;
+        this.sectorName=sectorName;
 
     }
 
@@ -52,6 +52,14 @@ public class RouteDetailData {
 
     public List<RoutePointData> getPoints() {
         return points;
+    }
+
+    public String getRockName() {
+        return rockName;
+    }
+
+    public String getSectorName() {
+        return sectorName;
     }
 
     @Override
