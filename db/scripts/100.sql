@@ -46,8 +46,7 @@ values ( (select id from Rock where name = 'Dupa Słonia'), 'Lipczyńska 1');
 insert into Sector ( rock_id, name)
 values ( (select id from Rock where name = 'Dupa Słonia'), 'Lipczyńska 2');
 
-insert into Sector ( rock_id, name)
-values ( (select id from Rock where name = 'Dupa Słonia'), 'Płyta Sasa i Ściana Luster');
+
 
 insert into Route ( sector_id, name, description, difficulty_level, image_name)
 values ( (select id from Sector where name = 'Lipczyńska 1'), 'Enpec', '8r +ST', 'III+', 'dupa_slonia_lipczynska');
@@ -74,11 +73,11 @@ insert into Route ( sector_id, name, description, difficulty_level, image_name)
 values ( (select id from Sector where name = 'Lipczyńska 1'), 'Apoteoza wytrysku', '7r +ST', 'VI.4', 'dupa_slonia_lipczynska');
 
 insert into Route ( sector_id, name, description, difficulty_level, image_name)
-values ( (select id from Sector where name = 'Lipczyńska 1'), 'Kant Lipczyńskiej', '5r', 'VI', 'dupa_slonia_lipczynska');
+values ( (select id from Sector where name = 'Lipczyńska 1'), 'Kant Lipczyńskiej 1', '5r', 'VI', 'dupa_slonia_lipczynska');
 
 
 insert into Route ( sector_id, name, description, difficulty_level, image_name)
-values ( (select id from Sector where name = 'Lipczyńska 2'), 'Kant Lipczyńskiej', '7r', 'VI', 'dupa_slonia_lipczynska2');
+values ( (select id from Sector where name = 'Lipczyńska 2'), 'Kant Lipczyńskiej 2', '7r', 'VI', 'dupa_slonia_lipczynska2');
 
 insert into Route ( sector_id, name, description, difficulty_level, image_name)
 values ( (select id from Sector where name = 'Lipczyńska 2'), 'Niemy cyk', '6r', 'VI.1', 'dupa_slonia_lipczynska2');
@@ -273,17 +272,17 @@ values ((select id  from Route where name = "Apoteoza wytrysku" ), 76, 22, 8);
 
 
 insert into Route_point (route_id, x_percent, y_percent, order_point)
-values ((select id  from Route where name = "Kant Lipczyńskiej" and sector_id = (select id from sector where name = 'Lipczyńska 2') ), 89, 74, 1);
+values ((select id  from Route where name = "Kant Lipczyńskiej 2"  ), 89, 74, 1);
 insert into Route_point (route_id, x_percent, y_percent, order_point)
-values ((select id  from Route where name = "Kant Lipczyńskiej" and sector_id = (select id from sector where name = 'Lipczyńska 2')), 89, 64, 2);
+values ((select id  from Route where name = "Kant Lipczyńskiej 2" ), 89, 64, 2);
 insert into Route_point (route_id, x_percent, y_percent, order_point)
-values ((select id  from Route where name = "Kant Lipczyńskiej" and sector_id = (select id from sector where name = 'Lipczyńska 2')), 86, 55, 3);
+values ((select id  from Route where name = "Kant Lipczyńskiej 2" ), 86, 55, 3);
 insert into Route_point (route_id, x_percent, y_percent, order_point)
-values ((select id  from Route where name = "Kant Lipczyńskiej" and sector_id = (select id from sector where name = 'Lipczyńska 2')), 84, 48, 4);
+values ((select id  from Route where name = "Kant Lipczyńskiej 2" ), 84, 48, 4);
 insert into Route_point (route_id, x_percent, y_percent, order_point)
-values ((select id  from Route where name = "Kant Lipczyńskiej" and sector_id = (select id from sector where name = 'Lipczyńska 2')), 83, 41, 5);
+values ((select id  from Route where name = "Kant Lipczyńskiej 2" ), 83, 41, 5);
 insert into Route_point (route_id, x_percent, y_percent, order_point)
-values ((select id  from Route where name = "Kant Lipczyńskiej" and sector_id = (select id from sector where name = 'Lipczyńska 2')), 81, 34, 6);
+values ((select id  from Route where name = "Kant Lipczyńskiej 2" ), 81, 34, 6);
 
 
 insert into Route_point (route_id, x_percent, y_percent, order_point)
@@ -316,21 +315,21 @@ insert into Route_point (route_id, x_percent, y_percent, order_point)
 values ((select id  from Route where name = "Rysa pokutników" ), 48, 10, 2);
 
 insert into Route_point (route_id, x_percent, y_percent, order_point)
-values ((select id  from Route where name = "Kant Lipczyńskiej" and sector_id = (select id from sector where name = 'Lipczyńska 1')), 49, 74, 1);
+values ((select id  from Route where name = "Kant Lipczyńskiej 1" ), 49, 74, 1);
 insert into Route_point (route_id, x_percent, y_percent, order_point)
-values ((select id  from Route where name = "Kant Lipczyńskiej" and sector_id = (select id from sector where name = 'Lipczyńska 1')), 48, 57, 2);
+values ((select id  from Route where name = "Kant Lipczyńskiej 1" ), 48, 57, 2);
 insert into Route_point (route_id, x_percent, y_percent, order_point)
-values ((select id  from Route where name = "Kant Lipczyńskiej" and sector_id = (select id from sector where name = 'Lipczyńska 1')), 47, 51, 3);
+values ((select id  from Route where name = "Kant Lipczyńskiej 1" ), 47, 51, 3);
 insert into Route_point (route_id, x_percent, y_percent, order_point)
-values ((select id  from Route where name = "Kant Lipczyńskiej" and sector_id = (select id from sector where name = 'Lipczyńska 1')), 46, 44, 4);
+values ((select id  from Route where name = "Kant Lipczyńskiej 1" ), 46, 44, 4);
 insert into Route_point (route_id, x_percent, y_percent, order_point)
-values ((select id  from Route where name = "Kant Lipczyńskiej" and sector_id = (select id from sector where name = 'Lipczyńska 1')), 46, 34, 5);
+values ((select id  from Route where name = "Kant Lipczyńskiej 1" ), 46, 34, 5);
 insert into Route_point (route_id, x_percent, y_percent, order_point)
-values ((select id  from Route where name = "Kant Lipczyńskiej" and sector_id = (select id from sector where name = 'Lipczyńska 1')), 42, 23, 6);
+values ((select id  from Route where name = "Kant Lipczyńskiej 1" ), 42, 23, 6);
 insert into Route_point (route_id, x_percent, y_percent, order_point)
-values ((select id  from Route where name = "Kant Lipczyńskiej" and sector_id = (select id from sector where name = 'Lipczyńska 1')), 38, 15, 7);
+values ((select id  from Route where name = "Kant Lipczyńskiej 1" ), 38, 15, 7);
 insert into Route_point (route_id, x_percent, y_percent, order_point)
-values ((select id  from Route where name = "Kant Lipczyńskiej" and sector_id = (select id from sector where name = 'Lipczyńska 1')), 38, 9, 8);
+values ((select id  from Route where name = "Kant Lipczyńskiej 1" ), 38, 9, 8);
 
 insert into Route_point (route_id, x_percent, y_percent, order_point)
 values ((select id  from Route where name = "Niemy Cyk" ), 59, 57, 1);
